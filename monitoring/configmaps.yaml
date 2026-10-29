@@ -1,0 +1,334 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    blackbox.yml: |
+      modules:
+        http_2xx:
+          prober: http
+          timeout: 5s
+          http:
+            method: GET
+            preferred_ip_protocol: ip4
+            valid_status_codes: [200]
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"blackbox.yml":"modules:\n  http_2xx:\n    prober: http\n    timeout: 5s\n    http:\n      method: GET\n      preferred_ip_protocol: ip4\n      valid_status_codes: [200]\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"blackbox-config","namespace":"monitoring"}}
+    creationTimestamp: "2026-10-28T21:18:59Z"
+    name: blackbox-config
+    namespace: monitoring
+    resourceVersion: "754222"
+    uid: 22c3667a-fd9e-4d93-bba6-e70bf9d514d6
+- apiVersion: v1
+  data:
+    fluent-bit.conf: |
+      [SERVICE]
+          Flush                 1
+          Log_Level             info
+          Parsers_File          /fluent-bit/etc/parsers.conf
+
+      [INPUT]
+          Name                  tail
+          Path                  /var/log/containers/*_robot-shop_*.log
+          Tag                   kube.*
+          multiline.parser      cri
+          Mem_Buf_Limit         5MB
+          Skip_Long_Lines       On
+          Refresh_Interval      5
+          Read_from_Head        Off
+
+      [FILTER]
+          Name                  kubernetes
+          Match                 kube.*
+          Kube_Tag_Prefix       kube.var.log.containers.
+          Merge_Log             On
+          Keep_Log              On
+
+      [OUTPUT]
+          Name                  loki
+          Match                 kube.*
+          Host                  loki.monitoring.svc.cluster.local
+          Port                  3100
+          Labels                job=fluent-bit, namespace=$kubernetes['namespace_name'], pod=$kubernetes['pod_name'], container=$kubernetes['container_name']
+          Line_Format           json
+          Retry_Limit           False
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"fluent-bit.conf":"[SERVICE]\n    Flush                 1\n    Log_Level             info\n    Parsers_File          /fluent-bit/etc/parsers.conf\n\n[INPUT]\n    Name                  tail\n    Path                  /var/log/containers/*_robot-shop_*.log\n    Tag                   kube.*\n    multiline.parser      cri\n    Mem_Buf_Limit         5MB\n    Skip_Long_Lines       On\n    Refresh_Interval      5\n    Read_from_Head        Off\n\n[FILTER]\n    Name                  kubernetes\n    Match                 kube.*\n    Kube_Tag_Prefix       kube.var.log.containers.\n    Merge_Log             On\n    Keep_Log              On\n\n[OUTPUT]\n    Name                  loki\n    Match                 kube.*\n    Host                  loki.monitoring.svc.cluster.local\n    Port                  3100\n    Labels                job=fluent-bit, namespace=$kubernetes['namespace_name'], pod=$kubernetes['pod_name'], container=$kubernetes['container_name']\n    Line_Format           json\n    Retry_Limit           False\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"fluent-bit-config","namespace":"monitoring"}}
+    creationTimestamp: "2026-10-28T13:20:51Z"
+    name: fluent-bit-config
+    namespace: monitoring
+    resourceVersion: "701974"
+    uid: 51780d00-1aec-4d27-8cd9-a88506659edc
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDMjCCAhqgAwIBAgIRALTsm64Hf+yoGa5AFY9OFEkwDQYJKoZIhvcNAQELBQAw
+      JzEQMA4GA1UEChMHQVdTIEVLUzETMBEGA1UEAxMKa3ViZXJuZXRlczAeFw0yNjEw
+      MjUxODUzMzNaFw0zMTEwMjQxODUzMzNaMCcxEDAOBgNVBAoTB0FXUyBFS1MxEzAR
+      BgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB
+      AQC9dlFMBxTvSDtPKFjb7jd48VSOtC7asgLxOWcG31/gxVGRE3Y7q1eL2YPJZbIo
+      dHiZOUjJC3ioEiuOOZOLbPtdz5aS5SePRyPjnJaF+r/1Lk4k6CuAKha/XMtaX2so
+      9PNAvx2W4u6hgxgw0cModIIzciTPqEdj+8pzZpD75vW/e08vJs/2y+K74jXzUeqr
+      YhNlpZe52Kg8zAdqpB3UMbBf2bpCvFAtcVTKfygHE76axgSFRfeZ8j+rd0m2T2hY
+      roYhuodmB+ZA0Yo0KdUY2YdHyxkAL9mt/2ifZUbno+stAfVVWzgHYbDXe49nltvZ
+      GjUI87x9+rIgcUszcfNBnhRhAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAPBgNV
+      HRMBAf8EBTADAQH/MB0GA1UdDgQWBBRjjFiFkcqQJh2XqyuA8xkYw4bL/jAVBgNV
+      HREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQChwWRh7cr96F2q
+      dw9xdBsGASa7PASxREdN1nOO7Yn+QUAQrSe9plIJhoiHXYpbW+GMOGGTpS6tcY78
+      HHry6L1heIOrFA7hG4JfRqvApZnTyEVU2ihDpmRHSdqskk2cRCtPDhCWezru00vL
+      Z3dcTTwjL5+m2q2y15HIDtaRuDMyYKsCg7CCKHST3VkQR5k09WwcMYxCNDevxYzz
+      cgGk1eMLDXZbUidQlRGKXbsvNr6ZQF1UYEXOclKEDFwCWdqDcBYVTV7dZv3SkLwS
+      w0LkfZEUqiSq6XhqAcGusKfaNZpZdTb2KyKosk6+SGiUfJmtThOHL7xs8Nfvq0TR
+      KQZ1qL3u
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-10-27T01:50:26Z"
+    name: kube-root-ca.crt
+    namespace: monitoring
+    resourceVersion: "306971"
+    uid: 4b06a35e-9cb1-40fa-962a-021ec72e197c
+- apiVersion: v1
+  data:
+    config.yaml: |2
+
+      auth_enabled: false
+      bloom_build:
+        builder:
+          planner_address: ""
+        enabled: false
+      bloom_gateway:
+        client:
+          addresses: ""
+        enabled: false
+      common:
+        compactor_grpc_address: 'loki.monitoring.svc.cluster.local:9095'
+        path_prefix: /tmp/loki
+        replication_factor: 1
+        storage:
+          filesystem:
+            chunks_directory: /var/loki/chunks
+            rules_directory: /var/loki/rules
+      frontend:
+        scheduler_address: ""
+        tail_proxy_url: ""
+      frontend_worker:
+        scheduler_address: ""
+      index_gateway:
+        mode: simple
+      limits_config:
+        max_cache_freshness_per_query: 10m
+        query_timeout: 300s
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+        split_queries_by_interval: 15m
+        volume_enabled: true
+      memberlist:
+        join_members:
+        - loki-memberlist.monitoring.svc.cluster.local
+      pattern_ingester:
+        enabled: false
+      query_range:
+        align_queries_with_step: true
+      ruler:
+        storage:
+          type: local
+        wal:
+          dir: /var/loki/ruler-wal
+      runtime_config:
+        file: /etc/loki/runtime-config/runtime-config.yaml
+      schema_config:
+        configs:
+        - from: "2024-04-01"
+          index:
+            period: 24h
+            prefix: index_
+          object_store: 'filesystem'
+          schema: v13
+          store: tsdb
+      server:
+        grpc_listen_port: 9095
+        http_listen_port: 3100
+        http_server_read_timeout: 600s
+        http_server_write_timeout: 600s
+      storage_config:
+        bloom_shipper:
+          working_directory: /var/loki/data/bloomshipper
+        boltdb_shipper:
+          index_gateway_client:
+            server_address: ""
+        hedging:
+          at: 250ms
+          max_per_second: 20
+          up_to: 3
+        tsdb_shipper:
+          index_gateway_client:
+            server_address: ""
+        use_thanos_objstore: false
+      tracing:
+        enabled: false
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:34Z"
+    labels:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki
+    namespace: monitoring
+    resourceVersion: "623027"
+    uid: 34f0f0ca-f0db-41e9-9971-712198ac7caf
+- apiVersion: v1
+  data:
+    nginx.conf: "worker_processes  5;  ## Default: 1\nerror_log  /dev/stderr;\npid
+      \       /tmp/nginx.pid;\nworker_rlimit_nofile 8192;\n\nevents {\n  worker_connections
+      \ 4096;  ## Default: 1024\n}\n\nhttp {\n  client_body_temp_path /tmp/client_temp;\n
+      \ proxy_temp_path       /tmp/proxy_temp_path;\n  fastcgi_temp_path     /tmp/fastcgi_temp;\n
+      \ uwsgi_temp_path       /tmp/uwsgi_temp;\n  scgi_temp_path        /tmp/scgi_temp;\n\n
+      \ client_max_body_size  4M;\n\n  proxy_read_timeout    600; ## 10 minutes\n
+      \ proxy_send_timeout    600;\n  proxy_connect_timeout 600;\n\n  proxy_http_version
+      \   1.1;\n\n  default_type application/octet-stream;\n  log_format   main '$remote_addr
+      - $remote_user [$time_local]  $status '\n        '\"$request\" $body_bytes_sent
+      \"$http_referer\" '\n        '\"$http_user_agent\" \"$http_x_forwarded_for\"';\n
+      \ access_log   /dev/stderr  main;\n\n  sendfile     on;\n  tcp_nopush   on;\n
+      \ resolver kube-dns.kube-system.svc.cluster.local.;\n\n  # if the X-Query-Tags
+      header is empty, set a noop= without a value as empty values are not logged\n
+      \ map $http_x_query_tags $query_tags {\n    \"\"        \"noop=\";            #
+      When header is empty, set noop=\n    default   $http_x_query_tags; # Otherwise,
+      preserve the original value\n  }\n\n  server {\n    listen             8080;\n
+      \   listen             [::]:8080;\n\n    location = / {\n      \n      return
+      200 'OK';\n      auth_basic off;\n    }\n\n    ########################################################\n
+      \   # Configure backend targets\n    location ^~ /ui {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n\n
+      \   # Distributor\n    location = /api/prom/push {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n    location
+      = /loki/api/v1/push {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /distributor/ring {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /otlp/v1/logs {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n\n    # Ingester\n    location = /flush {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location ^~ /ingester/ {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /ingester {\n      \n      internal;        # to suppress
+      301\n    }\n\n    # Ring\n    location = /ring {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n\n    # MemberListKV\n    location = /memberlist {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n\n
+      \   # Ruler\n    location = /ruler/ring {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /api/prom/rules {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location ^~ /api/prom/rules/ {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /loki/api/v1/rules {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location ^~ /loki/api/v1/rules/ {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /prometheus/api/v1/alerts {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n    location
+      = /prometheus/api/v1/rules {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n\n    # Compactor\n    location = /compactor/ring {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n    location
+      = /loki/api/v1/delete {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /loki/api/v1/cache/generation_numbers {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n\n
+      \   # IndexGateway\n    location = /indexgateway/ring {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n\n
+      \   # QueryScheduler\n    location = /scheduler/ring {\n      \n      proxy_pass
+      \      http://loki.monitoring.svc.cluster.local:3100$request_uri;\n    }\n\n
+      \   # Config\n    location = /config {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n\n\n    # QueryFrontend, Querier\n    location = /api/prom/tail {\n      proxy_set_header
+      Upgrade $http_upgrade;\n      proxy_set_header Connection \"upgrade\";\n      \n
+      \     proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /loki/api/v1/tail {\n      proxy_set_header Upgrade $http_upgrade;\n
+      \     proxy_set_header Connection \"upgrade\";\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location ^~ /api/prom/ {\n      \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /api/prom {\n      \n      internal;        # to suppress
+      301\n    }\n    location ^~ /loki/api/v1/ {\n      # pass custom headers set
+      by Grafana as X-Query-Tags which are logged as key/value pairs in metrics.go
+      log messages\n      proxy_set_header X-Query-Tags \"${query_tags},user=${http_x_grafana_user},dashboard_id=${http_x_dashboard_uid},dashboard_title=${http_x_dashboard_title},panel_id=${http_x_panel_id},panel_title=${http_x_panel_title},source_rule_uid=${http_x_rule_uid},rule_name=${http_x_rule_name},rule_folder=${http_x_rule_folder},rule_version=${http_x_rule_version},rule_source=${http_x_rule_source},rule_type=${http_x_rule_type}\";\n
+      \     \n      proxy_pass       http://loki.monitoring.svc.cluster.local:3100$request_uri;\n
+      \   }\n    location = /loki/api/v1 {\n      \n      internal;        # to suppress
+      301\n    }\n  }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:34Z"
+    labels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-gateway
+    namespace: monitoring
+    resourceVersion: "621749"
+    uid: b97fbdfc-f917-4271-a8aa-b065b60bc26b
+- apiVersion: v1
+  data:
+    runtime-config.yaml: |
+      {}
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:34Z"
+    labels:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-runtime
+    namespace: monitoring
+    resourceVersion: "621747"
+    uid: c76e1b5a-f2ac-4b0d-97a2-6591c75845c3
+- apiVersion: v1
+  data:
+    send.py: |-
+      import json, urllib.request, time
+      now = time.time_ns()
+      trace_id = "0123456789abcdef0123456789abcdef"
+      span_id = "0123456789abcdef"
+      payload = {
+       "resourceSpans": [{
+        "resource": {"attributes":[{"key":"service.name","value":{"stringValue":"robot-shop-trace-demo"}}]},
+        "scopeSpans": [{
+         "scope":{"name":"manual-otel-test"},
+         "spans":[{
+          "traceId":trace_id,"spanId":span_id,"name":"robot-shop-demo-request",
+          "kind":1,"startTimeUnixNano":str(now-100000000),
+          "endTimeUnixNano":str(now),
+          "attributes":[{"key":"test.type","value":{"stringValue":"connectivity-verification"}}],
+          "status":{"code":1}
+         }]
+        }]
+       }]
+      }
+      req=urllib.request.Request("http://jaeger.monitoring.svc.cluster.local:4318/v1/traces",data=json.dumps(payload).encode(),headers={"Content-Type":"application/json"},method="POST")
+      r=urllib.request.urlopen(req,timeout=10)
+      print("OTLP HTTP status:",r.status)
+      print("Trace ID:",trace_id)
+      print("Service: robot-shop-trace-demo")
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2026-10-28T20:37:18Z"
+    name: otel-trace-test
+    namespace: monitoring
+    resourceVersion: "747052"
+    uid: f209c80a-e8a8-4548-bab3-e97566a33632
+kind: List
+metadata:
+  resourceVersion: ""
