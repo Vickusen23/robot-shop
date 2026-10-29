@@ -1,0 +1,2742 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-28T21:23:32Z"
+    generateName: blackbox-exporter-77cf69649d-
+    generation: 1
+    labels:
+      app: blackbox-exporter
+      pod-template-hash: 77cf69649d
+    name: blackbox-exporter-77cf69649d-fg4ln
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: blackbox-exporter-77cf69649d
+      uid: d32c670c-28fa-4f7d-8242-b97b00a254b7
+    resourceVersion: "755025"
+    uid: cf86094d-5a88-4b05-bdba-30210ddf4d00
+  spec:
+    containers:
+    - args:
+      - --config.file=/etc/blackbox/blackbox.yml
+      image: prom/blackbox-exporter:v0.27.0
+      imagePullPolicy: IfNotPresent
+      name: blackbox-exporter
+      ports:
+      - containerPort: 9115
+        name: http
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/blackbox
+        name: config
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-x57ql
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: blackbox-config
+      name: config
+    - name: kube-api-access-x57ql
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T21:23:33Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T21:23:32Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T21:23:35Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T21:23:35Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T21:23:32Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://b1f05d4ce81f7ff179e3b4efec4d904370abacadd289d1311a4ca4fd4e58cf91
+      image: docker.io/prom/blackbox-exporter:v0.27.0
+      imageID: docker.io/prom/blackbox-exporter@sha256:a50c4c0eda297baa1678cd4dc4712a67fdea713b832d43ce7fcc5f9bea05094d
+      lastState: {}
+      name: blackbox-exporter
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T21:23:34Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 10
+          uid: 0
+      volumeMounts:
+      - mountPath: /etc/blackbox
+        name: config
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-x57ql
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.2.6
+    podIPs:
+    - ip: 172.31.2.6
+    qosClass: BestEffort
+    startTime: "2026-10-28T21:23:32Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2026-10-28T17:13:55+01:00"
+    creationTimestamp: "2026-10-28T16:14:28Z"
+    generateName: fluent-bit-
+    generation: 1
+    labels:
+      app: fluent-bit
+      controller-revision-hash: 8cc54b899
+      pod-template-generation: "2"
+    name: fluent-bit-2qk6c
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: fluent-bit
+      uid: 16895c3b-7829-43e7-b832-67ce97bdfa2c
+    resourceVersion: "702242"
+    uid: 3ce6b148-6a78-41a8-ba24-32849560d352
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-172-31-80-49.ec2.internal
+    containers:
+    - image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imagePullPolicy: IfNotPresent
+      name: fluent-bit
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        subPath: fluent-bit.conf
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-tz87g
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: fluent-bit
+    serviceAccountName: fluent-bit
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - hostPath:
+        path: /var/log
+        type: ""
+      name: varlog
+    - configMap:
+        defaultMode: 420
+        name: fluent-bit-config
+      name: config
+    - name: kube-api-access-tz87g
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:08Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:14:28Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:08Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:08Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:14:28Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 50m
+        memory: 64Mi
+      containerID: containerd://0200055ae4c005aaddf7253cf2c4f9063d179a7f02334755a0692c54783fce96
+      image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imageID: cr.fluentbit.io/fluent/fluent-bit@sha256:d6dec000c4929a439562525728c708f6e99800d7ddc82efd6aa4f45f3a20b562
+      lastState: {}
+      name: fluent-bit
+      ready: true
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T16:15:08Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-tz87g
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.84.213
+    podIPs:
+    - ip: 172.31.84.213
+    qosClass: Burstable
+    startTime: "2026-10-28T16:14:28Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2026-10-28T17:13:55+01:00"
+    creationTimestamp: "2026-10-28T16:15:09Z"
+    generateName: fluent-bit-
+    generation: 1
+    labels:
+      app: fluent-bit
+      controller-revision-hash: 8cc54b899
+      pod-template-generation: "2"
+    name: fluent-bit-brz7l
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: fluent-bit
+      uid: 16895c3b-7829-43e7-b832-67ce97bdfa2c
+    resourceVersion: "702270"
+    uid: df4f7902-f543-48b6-a8a2-4ef07bc409ce
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-172-31-9-38.ec2.internal
+    containers:
+    - image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imagePullPolicy: IfNotPresent
+      name: fluent-bit
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        subPath: fluent-bit.conf
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-7827w
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: fluent-bit
+    serviceAccountName: fluent-bit
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - hostPath:
+        path: /var/log
+        type: ""
+      name: varlog
+    - configMap:
+        defaultMode: 420
+        name: fluent-bit-config
+      name: config
+    - name: kube-api-access-7827w
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:09Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:09Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:10Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:10Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:15:09Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 50m
+        memory: 64Mi
+      containerID: containerd://fa28bbb993a27749da71601a3d1829e292278d56b844c8df1e5a2b339d01a7e7
+      image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imageID: cr.fluentbit.io/fluent/fluent-bit@sha256:d6dec000c4929a439562525728c708f6e99800d7ddc82efd6aa4f45f3a20b562
+      lastState: {}
+      name: fluent-bit
+      ready: true
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T16:15:09Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-7827w
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.2.143
+    podIPs:
+    - ip: 172.31.2.143
+    qosClass: Burstable
+    startTime: "2026-10-28T16:15:09Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2026-10-28T17:13:55+01:00"
+    creationTimestamp: "2026-10-28T16:13:56Z"
+    generateName: fluent-bit-
+    generation: 1
+    labels:
+      app: fluent-bit
+      controller-revision-hash: 8cc54b899
+      pod-template-generation: "2"
+    name: fluent-bit-ngmqf
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: fluent-bit
+      uid: 16895c3b-7829-43e7-b832-67ce97bdfa2c
+    resourceVersion: "702106"
+    uid: 47a2a51c-f180-47fe-a51a-a052af32a117
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-172-31-40-182.ec2.internal
+    containers:
+    - image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imagePullPolicy: IfNotPresent
+      name: fluent-bit
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        subPath: fluent-bit.conf
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-l4nz6
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: fluent-bit
+    serviceAccountName: fluent-bit
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - hostPath:
+        path: /var/log
+        type: ""
+      name: varlog
+    - configMap:
+        defaultMode: 420
+        name: fluent-bit-config
+      name: config
+    - name: kube-api-access-l4nz6
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:14:27Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:13:56Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:14:27Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:14:27Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T16:13:56Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 50m
+        memory: 64Mi
+      containerID: containerd://ba1f91dc26575e70d0233a75abf536f4cd308fd18949ec3bdcae782a599e8852
+      image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+      imageID: cr.fluentbit.io/fluent/fluent-bit@sha256:d6dec000c4929a439562525728c708f6e99800d7ddc82efd6aa4f45f3a20b562
+      lastState: {}
+      name: fluent-bit
+      ready: true
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T16:14:27Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/log
+        name: varlog
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /fluent-bit/etc/fluent-bit.conf
+        name: config
+        readOnly: true
+        recursiveReadOnly: Disabled
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-l4nz6
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.46.162
+    podIPs:
+    - ip: 172.31.46.162
+    qosClass: Burstable
+    startTime: "2026-10-28T16:13:56Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-28T20:12:48Z"
+    generateName: jaeger-5975df4b65-
+    generation: 1
+    labels:
+      app: jaeger
+      pod-template-hash: 5975df4b65
+    name: jaeger-5975df4b65-tm5h7
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: jaeger-5975df4b65
+      uid: cba68a9d-6e4e-4687-bf89-a5e4bc14ba7d
+    resourceVersion: "742861"
+    uid: 8b1da2ea-7c23-46e4-8b69-f9ecd93adcbf
+  spec:
+    containers:
+    - env:
+      - name: COLLECTOR_OTLP_ENABLED
+        value: "true"
+      image: jaegertracing/all-in-one:1.76.0
+      imagePullPolicy: IfNotPresent
+      name: jaeger
+      ports:
+      - containerPort: 16686
+        name: ui
+        protocol: TCP
+      - containerPort: 4317
+        name: otlp-grpc
+        protocol: TCP
+      - containerPort: 4318
+        name: otlp-http
+        protocol: TCP
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-crmhx
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-crmhx
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:12:49Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:12:48Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:12:51Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:12:51Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:12:48Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 128Mi
+      containerID: containerd://4356a703f83885bef695c4413ee5c0f1f6436d1669dcd00fb70197a04a6cc249
+      image: docker.io/jaegertracing/all-in-one:1.76.0
+      imageID: docker.io/jaegertracing/all-in-one@sha256:ab6f1a1f0fb49ea08bcd19f6b84f6081d0d44b364b6de148e1798eb5816bacac
+      lastState: {}
+      name: jaeger
+      ready: true
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T20:12:50Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 10001
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-crmhx
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.15.237
+    podIPs:
+    - ip: 172.31.15.237
+    qosClass: Burstable
+    startTime: "2026-10-28T20:12:48Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      checksum/config: 34370fbfb5e552d37edfd01eeae55bb5876eab1aa458d2d37356ab770f8bfc6a
+      kubectl.kubernetes.io/default-container: loki
+    creationTimestamp: "2026-10-28T08:52:06Z"
+    generateName: loki-
+    generation: 1
+    labels:
+      app.kubernetes.io/component: single-binary
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/part-of: memberlist
+      apps.kubernetes.io/pod-index: "0"
+      controller-revision-hash: loki-67c885dd44
+      statefulset.kubernetes.io/pod-name: loki-0
+    name: loki-0
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: StatefulSet
+      name: loki
+      uid: 77518b5f-0360-4111-986c-5d223ddab0bd
+    resourceVersion: "626228"
+    uid: c033a778-7117-4452-ab07-e0e362196eed
+  spec:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: single-binary
+              app.kubernetes.io/instance: loki
+              app.kubernetes.io/name: loki
+          topologyKey: kubernetes.io/hostname
+    automountServiceAccountToken: true
+    containers:
+    - args:
+      - -config.file=/etc/loki/config/config.yaml
+      - -target=all
+      image: docker.io/grafana/loki:3.6.11
+      imagePullPolicy: IfNotPresent
+      name: loki
+      ports:
+      - containerPort: 3100
+        name: http-metrics
+        protocol: TCP
+      - containerPort: 9095
+        name: grpc
+        protocol: TCP
+      - containerPort: 7946
+        name: http-memberlist
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /ready
+          port: http-metrics
+          scheme: HTTP
+        initialDelaySeconds: 15
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /etc/loki/config
+        name: config
+      - mountPath: /etc/loki/runtime-config
+        name: runtime-config
+      - mountPath: /rules
+        name: sc-rules-volume
+      - mountPath: /var/loki
+        name: loki-var
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5xg24
+        readOnly: true
+    - env:
+      - name: METHOD
+        value: WATCH
+      - name: LABEL
+        value: loki_rule
+      - name: FOLDER
+        value: /rules
+      - name: RESOURCE
+        value: both
+      - name: WATCH_SERVER_TIMEOUT
+        value: "60"
+      - name: WATCH_CLIENT_TIMEOUT
+        value: "60"
+      - name: LOG_LEVEL
+        value: INFO
+      image: docker.io/kiwigrid/k8s-sidecar:2.5.0
+      imagePullPolicy: IfNotPresent
+      name: loki-sc-rules
+      resources: {}
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /rules
+        name: sc-rules-volume
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5xg24
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    hostname: loki-0
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 10001
+      fsGroupChangePolicy: OnRootMismatch
+      runAsGroup: 10001
+      runAsNonRoot: true
+      runAsUser: 10001
+    serviceAccount: loki
+    serviceAccountName: loki
+    subdomain: loki-headless
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - emptyDir: {}
+      name: tmp
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: config.yaml
+          path: config.yaml
+        name: loki
+      name: config
+    - configMap:
+        defaultMode: 420
+        name: loki-runtime
+      name: runtime-config
+    - emptyDir: {}
+      name: sc-rules-volume
+    - emptyDir:
+        sizeLimit: 500Mi
+      name: loki-var
+    - name: kube-api-access-5xg24
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:52:06Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:52:06Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:52:48Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:52:48Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:52:06Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://48fd81092828286220f905cfcea9df767dae0b7e4027da7c1d5e88540b50f0dd
+      image: docker.io/grafana/loki:3.6.11
+      imageID: docker.io/grafana/loki@sha256:44148ad243c07957113baea950ee5ba9b0c8eff8d7e38ff3cc1c0af705790945
+      lastState: {}
+      name: loki
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T08:52:07Z"
+      user:
+        linux:
+          gid: 10001
+          supplementalGroups:
+          - 100
+          - 10001
+          uid: 10001
+      volumeMounts:
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /etc/loki/config
+        name: config
+      - mountPath: /etc/loki/runtime-config
+        name: runtime-config
+      - mountPath: /rules
+        name: sc-rules-volume
+      - mountPath: /var/loki
+        name: loki-var
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5xg24
+        readOnly: true
+        recursiveReadOnly: Disabled
+    - containerID: containerd://e239ceae471bb5ef3cced40105535d676a7e604a2ab947c136fb77e00d606f1d
+      image: docker.io/kiwigrid/k8s-sidecar:2.5.0
+      imageID: docker.io/kiwigrid/k8s-sidecar@sha256:a6b3f707f883108376514489a94d6629109a327b2978e1d826cd104c4ca436df
+      lastState: {}
+      name: loki-sc-rules
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T08:52:07Z"
+      user:
+        linux:
+          gid: 10001
+          supplementalGroups:
+          - 10001
+          uid: 10001
+      volumeMounts:
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /rules
+        name: sc-rules-volume
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5xg24
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.5.92
+    podIPs:
+    - ip: 172.31.5.92
+    qosClass: BestEffort
+    startTime: "2026-10-28T08:52:06Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      checksum/config: ff015bd125f529abec13dae9359150ba80dd9fa80ef5698465aceb2b78b27aed
+    creationTimestamp: "2026-10-28T08:28:36Z"
+    generateName: loki-gateway-6df7c96bc9-
+    generation: 1
+    labels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+      pod-template-hash: 6df7c96bc9
+    name: loki-gateway-6df7c96bc9-nvbq2
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: loki-gateway-6df7c96bc9
+      uid: d870b146-174d-4dfb-83f9-fdce6f1e9a7e
+    resourceVersion: "621926"
+    uid: dd890c10-c7ec-4fb7-ab09-0bc9c1a30403
+  spec:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway
+              app.kubernetes.io/instance: loki
+              app.kubernetes.io/name: loki
+          topologyKey: kubernetes.io/hostname
+    containers:
+    - image: docker.io/nginxinc/nginx-unprivileged:1.29-alpine
+      imagePullPolicy: IfNotPresent
+      name: nginx
+      ports:
+      - containerPort: 8080
+        name: http-metrics
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: http-metrics
+          scheme: HTTP
+        initialDelaySeconds: 15
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/nginx
+        name: config
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /docker-entrypoint.d
+        name: docker-entrypoint-d-override
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-xx4zh
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 101
+      runAsGroup: 101
+      runAsNonRoot: true
+      runAsUser: 101
+    serviceAccount: loki
+    serviceAccountName: loki
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: loki-gateway
+      name: config
+    - emptyDir: {}
+      name: tmp
+    - emptyDir: {}
+      name: docker-entrypoint-d-override
+    - name: kube-api-access-xx4zh
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:28:37Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:28:36Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:28:59Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:28:59Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T08:28:36Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://c539d9327bde967ebc67f6ca80127da351e6807d2cc22620c4c617fb55e03e7f
+      image: docker.io/nginxinc/nginx-unprivileged:1.29-alpine
+      imageID: docker.io/nginxinc/nginx-unprivileged@sha256:0c79d56aee561a1d81c63f00eee5fb5fe29279560cdc55e91425133104c7fbe6
+      lastState: {}
+      name: nginx
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-28T08:28:37Z"
+      user:
+        linux:
+          gid: 101
+          supplementalGroups:
+          - 101
+          uid: 101
+      volumeMounts:
+      - mountPath: /etc/nginx
+        name: config
+      - mountPath: /tmp
+        name: tmp
+      - mountPath: /docker-entrypoint.d
+        name: docker-entrypoint-d-override
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-xx4zh
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.0.177
+    podIPs:
+    - ip: 172.31.0.177
+    qosClass: BestEffort
+    startTime: "2026-10-28T08:28:36Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-28T20:38:02Z"
+    generateName: otel-trace-test-
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+      batch.kubernetes.io/job-name: otel-trace-test
+      controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+      job-name: otel-trace-test
+    name: otel-trace-test-n66d5
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: otel-trace-test
+      uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+    resourceVersion: "747238"
+    uid: 98c85593-e3f9-4b08-b367-487fdf5cad45
+  spec:
+    containers:
+    - command:
+      - python
+      - -c
+      - |2
+
+        import json,time,urllib.request
+        now=time.time_ns()
+        p={"resourceSpans":[{"resource":{"attributes":[{"key":"service.name","value":{"stringValue":"robot-shop-trace-demo"}}]},"scopeSpans":[{"scope":{"name":"manual-otel-test"},"spans":[{"traceId":"0123456789abcdef0123456789abcdef","spanId":"0123456789abcdef","name":"robot-shop-demo-request","kind":1,"startTimeUnixNano":str(now-100000000),"endTimeUnixNano":str(now),"attributes":[{"key":"test.type","value":{"stringValue":"connectivity-verification"}}],"status":{"code":1}}]}]}]}
+        r=urllib.request.Request("http://jaeger.monitoring.svc.cluster.local:4318/v1/traces",data=json.dumps(p).encode(),headers={"Content-Type":"application/json"},method="POST")
+        with urllib.request.urlopen(r,timeout=10) as x: print("OTLP status:",x.status)
+        print("Trace ID: 0123456789abcdef0123456789abcdef")
+      image: python:3.12-alpine
+      imagePullPolicy: IfNotPresent
+      name: otel-trace-test
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-9pg62
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-9pg62
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:38:05Z"
+      observedGeneration: 1
+      status: "False"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:38:02Z"
+      observedGeneration: 1
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:38:02Z"
+      observedGeneration: 1
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:38:02Z"
+      observedGeneration: 1
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-28T20:38:02Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://0a40e9ad7646add3aeefcb1f76ca86d3a541e0539755f36fe391b5acce56aaeb
+      image: docker.io/library/python:3.12-alpine
+      imageID: docker.io/library/python@sha256:5789aa194f757888f41fa3d48e14b6feaa1b57c0af0b56fcb1372d6474d3bff0
+      lastState: {}
+      name: otel-trace-test
+      ready: false
+      resources: {}
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://0a40e9ad7646add3aeefcb1f76ca86d3a541e0539755f36fe391b5acce56aaeb
+          exitCode: 0
+          finishedAt: "2026-10-28T20:38:04Z"
+          reason: Completed
+          startedAt: "2026-10-28T20:38:03Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 6
+          - 10
+          - 11
+          - 20
+          - 26
+          - 27
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-9pg62
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Succeeded
+    podIP: 172.31.2.6
+    podIPs:
+    - ip: 172.31.2.6
+    qosClass: BestEffort
+    startTime: "2026-10-28T20:38:02Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"blackbox-exporter","namespace":"monitoring"},"spec":{"ports":[{"name":"http","port":9115,"targetPort":9115}],"selector":{"app":"blackbox-exporter"}}}
+    creationTimestamp: "2026-10-28T21:23:37Z"
+    name: blackbox-exporter
+    namespace: monitoring
+    resourceVersion: "755035"
+    uid: c55b1cb7-c75a-4909-ac9d-8f2ff073a54c
+  spec:
+    clusterIP: 10.100.183.65
+    clusterIPs:
+    - 10.100.183.65
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 9115
+      protocol: TCP
+      targetPort: 9115
+    selector:
+      app: blackbox-exporter
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"jaeger","namespace":"monitoring"},"spec":{"ports":[{"name":"ui","port":16686,"targetPort":16686},{"name":"otlp-grpc","port":4317,"targetPort":4317},{"name":"otlp-http","port":4318,"targetPort":4318}],"selector":{"app":"jaeger"}}}
+    creationTimestamp: "2026-10-28T20:12:49Z"
+    name: jaeger
+    namespace: monitoring
+    resourceVersion: "742850"
+    uid: 1fa88169-e316-4172-bffd-eddfbe68cd72
+  spec:
+    clusterIP: 10.100.137.139
+    clusterIPs:
+    - 10.100.137.139
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: ui
+      port: 16686
+      protocol: TCP
+      targetPort: 16686
+    - name: otlp-grpc
+      port: 4317
+      protocol: TCP
+      targetPort: 4317
+    - name: otlp-http
+      port: 4318
+      protocol: TCP
+      targetPort: 4318
+    selector:
+      app: jaeger
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:35Z"
+    labels:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki
+    namespace: monitoring
+    resourceVersion: "621759"
+    uid: e6d957cc-6f43-4d9d-8aec-49d92e9a55c0
+  spec:
+    clusterIP: 10.100.58.51
+    clusterIPs:
+    - 10.100.58.51
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 3100
+      protocol: TCP
+      targetPort: http-metrics
+    - name: grpc
+      port: 9095
+      protocol: TCP
+      targetPort: grpc
+    selector:
+      app.kubernetes.io/component: single-binary
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:35Z"
+    labels:
+      app.kubernetes.io/component: canary
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-canary
+    namespace: monitoring
+    resourceVersion: "621771"
+    uid: c99972d3-1b9e-45fc-83df-01ffbc7041cc
+  spec:
+    clusterIP: 10.100.76.165
+    clusterIPs:
+    - 10.100.76.165
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 3500
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: canary
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:02:14Z"
+    labels:
+      app.kubernetes.io/component: memcached-chunks-cache
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-chunks-cache
+    namespace: monitoring
+    resourceVersion: "617018"
+    uid: 341e0cdb-12cd-42d0-84ae-b69a4c546d8a
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: memcached-client
+      port: 11211
+      protocol: TCP
+      targetPort: client
+    - name: http-metrics
+      port: 9150
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: memcached-chunks-cache
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:35Z"
+    labels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+      prometheus.io/service-monitor: "false"
+    name: loki-gateway
+    namespace: monitoring
+    resourceVersion: "621765"
+    uid: 56c4cee3-69a5-411c-86ab-9f54275d19bb
+  spec:
+    clusterIP: 10.100.27.151
+    clusterIPs:
+    - 10.100.27.151
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 80
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:35Z"
+    labels:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+      prometheus.io/service-monitor: "false"
+      variant: headless
+    name: loki-headless
+    namespace: monitoring
+    resourceVersion: "621757"
+    uid: f4eb6ee2-6ffe-42d2-b3e4-9673a364c303
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 3100
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:35Z"
+    labels:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-memberlist
+    namespace: monitoring
+    resourceVersion: "621761"
+    uid: 1793ff6b-93d8-4372-85d9-0396d4b6fdab
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp
+      port: 7946
+      protocol: TCP
+      targetPort: http-memberlist
+    selector:
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/part-of: memberlist
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:02:14Z"
+    labels:
+      app.kubernetes.io/component: memcached-results-cache
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-results-cache
+    namespace: monitoring
+    resourceVersion: "617022"
+    uid: 604d7d83-6567-4778-b054-2ecd07142d4b
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: memcached-client
+      port: 11211
+      protocol: TCP
+      targetPort: client
+    - name: http-metrics
+      port: 9150
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: memcached-results-cache
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"fluent-bit","namespace":"monitoring"},"spec":{"selector":{"matchLabels":{"app":"fluent-bit"}},"template":{"metadata":{"labels":{"app":"fluent-bit"}},"spec":{"containers":[{"image":"cr.fluentbit.io/fluent/fluent-bit:3.2.10","imagePullPolicy":"IfNotPresent","name":"fluent-bit","resources":{"limits":{"memory":"200Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"volumeMounts":[{"mountPath":"/var/log","name":"varlog","readOnly":true},{"mountPath":"/fluent-bit/etc/fluent-bit.conf","name":"config","readOnly":true,"subPath":"fluent-bit.conf"}]}],"serviceAccountName":"fluent-bit","tolerations":[{"operator":"Exists"}],"volumes":[{"hostPath":{"path":"/var/log"},"name":"varlog"},{"configMap":{"name":"fluent-bit-config"},"name":"config"}]}}}}
+    creationTimestamp: "2026-10-28T13:20:52Z"
+    generation: 2
+    name: fluent-bit
+    namespace: monitoring
+    resourceVersion: "702271"
+    uid: 16895c3b-7829-43e7-b832-67ce97bdfa2c
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: fluent-bit
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-10-28T17:13:55+01:00"
+        labels:
+          app: fluent-bit
+      spec:
+        containers:
+        - image: cr.fluentbit.io/fluent/fluent-bit:3.2.10
+          imagePullPolicy: IfNotPresent
+          name: fluent-bit
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/log
+            name: varlog
+            readOnly: true
+          - mountPath: /fluent-bit/etc/fluent-bit.conf
+            name: config
+            readOnly: true
+            subPath: fluent-bit.conf
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: fluent-bit
+        serviceAccountName: fluent-bit
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - operator: Exists
+        volumes:
+        - hostPath:
+            path: /var/log
+            type: ""
+          name: varlog
+        - configMap:
+            defaultMode: 420
+            name: fluent-bit-config
+          name: config
+    updateStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 3
+    desiredNumberScheduled: 3
+    numberAvailable: 3
+    numberMisscheduled: 0
+    numberReady: 3
+    observedGeneration: 2
+    updatedNumberScheduled: 3
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"blackbox-exporter","namespace":"monitoring"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"blackbox-exporter"}},"template":{"metadata":{"labels":{"app":"blackbox-exporter"}},"spec":{"containers":[{"args":["--config.file=/etc/blackbox/blackbox.yml"],"image":"prom/blackbox-exporter:v0.27.0","name":"blackbox-exporter","ports":[{"containerPort":9115,"name":"http"}],"volumeMounts":[{"mountPath":"/etc/blackbox","name":"config","readOnly":true}]}],"volumes":[{"configMap":{"name":"blackbox-config"},"name":"config"}]}}}}
+    creationTimestamp: "2026-10-28T21:23:32Z"
+    generation: 1
+    name: blackbox-exporter
+    namespace: monitoring
+    resourceVersion: "755027"
+    uid: 3cfcf82e-2495-43d3-a346-af902b472f2a
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: blackbox-exporter
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: blackbox-exporter
+      spec:
+        containers:
+        - args:
+          - --config.file=/etc/blackbox/blackbox.yml
+          image: prom/blackbox-exporter:v0.27.0
+          imagePullPolicy: IfNotPresent
+          name: blackbox-exporter
+          ports:
+          - containerPort: 9115
+            name: http
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/blackbox
+            name: config
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: blackbox-config
+          name: config
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-28T21:23:35Z"
+      lastUpdateTime: "2026-10-28T21:23:35Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-28T21:23:32Z"
+      lastUpdateTime: "2026-10-28T21:23:35Z"
+      message: ReplicaSet "blackbox-exporter-77cf69649d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"jaeger","namespace":"monitoring"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"jaeger"}},"template":{"metadata":{"labels":{"app":"jaeger"}},"spec":{"containers":[{"env":[{"name":"COLLECTOR_OTLP_ENABLED","value":"true"}],"image":"jaegertracing/all-in-one:1.76.0","name":"jaeger","ports":[{"containerPort":16686,"name":"ui"},{"containerPort":4317,"name":"otlp-grpc"},{"containerPort":4318,"name":"otlp-http"}],"resources":{"limits":{"memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}}]}}}}
+    creationTimestamp: "2026-10-28T20:12:48Z"
+    generation: 1
+    name: jaeger
+    namespace: monitoring
+    resourceVersion: "742866"
+    uid: 01aae2b4-ca2c-4a0e-8831-f4515f2fc224
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: jaeger
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: jaeger
+      spec:
+        containers:
+        - env:
+          - name: COLLECTOR_OTLP_ENABLED
+            value: "true"
+          image: jaegertracing/all-in-one:1.76.0
+          imagePullPolicy: IfNotPresent
+          name: jaeger
+          ports:
+          - containerPort: 16686
+            name: ui
+            protocol: TCP
+          - containerPort: 4317
+            name: otlp-grpc
+            protocol: TCP
+          - containerPort: 4318
+            name: otlp-http
+            protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-28T20:12:51Z"
+      lastUpdateTime: "2026-10-28T20:12:51Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-28T20:12:48Z"
+      lastUpdateTime: "2026-10-28T20:12:51Z"
+      message: ReplicaSet "jaeger-5975df4b65" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:36Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki-gateway
+    namespace: monitoring
+    resourceVersion: "621932"
+    uid: 18407a0c-e636-4478-b2fc-b97d5624b2f7
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: gateway
+        app.kubernetes.io/instance: loki
+        app.kubernetes.io/name: loki
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          checksum/config: ff015bd125f529abec13dae9359150ba80dd9fa80ef5698465aceb2b78b27aed
+        labels:
+          app.kubernetes.io/component: gateway
+          app.kubernetes.io/instance: loki
+          app.kubernetes.io/name: loki
+      spec:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: gateway
+                  app.kubernetes.io/instance: loki
+                  app.kubernetes.io/name: loki
+              topologyKey: kubernetes.io/hostname
+        containers:
+        - image: docker.io/nginxinc/nginx-unprivileged:1.29-alpine
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+          - containerPort: 8080
+            name: http-metrics
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http-metrics
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/nginx
+            name: config
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /docker-entrypoint.d
+            name: docker-entrypoint-d-override
+        dnsPolicy: ClusterFirst
+        enableServiceLinks: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 101
+          runAsGroup: 101
+          runAsNonRoot: true
+          runAsUser: 101
+        serviceAccount: loki
+        serviceAccountName: loki
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: loki-gateway
+          name: config
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: docker-entrypoint-d-override
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-28T08:28:59Z"
+      lastUpdateTime: "2026-10-28T08:28:59Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-28T08:28:36Z"
+      lastUpdateTime: "2026-10-28T08:28:59Z"
+      message: ReplicaSet "loki-gateway-6df7c96bc9" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-10-28T21:23:32Z"
+    generation: 1
+    labels:
+      app: blackbox-exporter
+      pod-template-hash: 77cf69649d
+    name: blackbox-exporter-77cf69649d
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: blackbox-exporter
+      uid: 3cfcf82e-2495-43d3-a346-af902b472f2a
+    resourceVersion: "755026"
+    uid: d32c670c-28fa-4f7d-8242-b97b00a254b7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: blackbox-exporter
+        pod-template-hash: 77cf69649d
+    template:
+      metadata:
+        labels:
+          app: blackbox-exporter
+          pod-template-hash: 77cf69649d
+      spec:
+        containers:
+        - args:
+          - --config.file=/etc/blackbox/blackbox.yml
+          image: prom/blackbox-exporter:v0.27.0
+          imagePullPolicy: IfNotPresent
+          name: blackbox-exporter
+          ports:
+          - containerPort: 9115
+            name: http
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/blackbox
+            name: config
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: blackbox-config
+          name: config
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-10-28T20:12:48Z"
+    generation: 1
+    labels:
+      app: jaeger
+      pod-template-hash: 5975df4b65
+    name: jaeger-5975df4b65
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: jaeger
+      uid: 01aae2b4-ca2c-4a0e-8831-f4515f2fc224
+    resourceVersion: "742864"
+    uid: cba68a9d-6e4e-4687-bf89-a5e4bc14ba7d
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: jaeger
+        pod-template-hash: 5975df4b65
+    template:
+      metadata:
+        labels:
+          app: jaeger
+          pod-template-hash: 5975df4b65
+      spec:
+        containers:
+        - env:
+          - name: COLLECTOR_OTLP_ENABLED
+            value: "true"
+          image: jaegertracing/all-in-one:1.76.0
+          imagePullPolicy: IfNotPresent
+          name: jaeger
+          ports:
+          - containerPort: 16686
+            name: ui
+            protocol: TCP
+          - containerPort: 4317
+            name: otlp-grpc
+            protocol: TCP
+          - containerPort: 4318
+            name: otlp-http
+            protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:36Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/name: loki
+      pod-template-hash: 6df7c96bc9
+    name: loki-gateway-6df7c96bc9
+    namespace: monitoring
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: loki-gateway
+      uid: 18407a0c-e636-4478-b2fc-b97d5624b2f7
+    resourceVersion: "621928"
+    uid: d870b146-174d-4dfb-83f9-fdce6f1e9a7e
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: gateway
+        app.kubernetes.io/instance: loki
+        app.kubernetes.io/name: loki
+        pod-template-hash: 6df7c96bc9
+    template:
+      metadata:
+        annotations:
+          checksum/config: ff015bd125f529abec13dae9359150ba80dd9fa80ef5698465aceb2b78b27aed
+        labels:
+          app.kubernetes.io/component: gateway
+          app.kubernetes.io/instance: loki
+          app.kubernetes.io/name: loki
+          pod-template-hash: 6df7c96bc9
+      spec:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: gateway
+                  app.kubernetes.io/instance: loki
+                  app.kubernetes.io/name: loki
+              topologyKey: kubernetes.io/hostname
+        containers:
+        - image: docker.io/nginxinc/nginx-unprivileged:1.29-alpine
+          imagePullPolicy: IfNotPresent
+          name: nginx
+          ports:
+          - containerPort: 8080
+            name: http-metrics
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http-metrics
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/nginx
+            name: config
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /docker-entrypoint.d
+            name: docker-entrypoint-d-override
+        dnsPolicy: ClusterFirst
+        enableServiceLinks: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 101
+          runAsGroup: 101
+          runAsNonRoot: true
+          runAsUser: 101
+        serviceAccount: loki
+        serviceAccountName: loki
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: loki-gateway
+          name: config
+        - emptyDir: {}
+          name: tmp
+        - emptyDir: {}
+          name: docker-entrypoint-d-override
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: loki
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2026-10-28T08:28:36Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/component: single-binary
+      app.kubernetes.io/instance: loki
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 3.6.11
+      helm.sh/chart: loki-7.5.0
+    name: loki
+    namespace: monitoring
+    resourceVersion: "626235"
+    uid: 77518b5f-0360-4111-986c-5d223ddab0bd
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: Parallel
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: single-binary
+        app.kubernetes.io/instance: loki
+        app.kubernetes.io/name: loki
+    serviceName: loki-headless
+    template:
+      metadata:
+        annotations:
+          checksum/config: 34370fbfb5e552d37edfd01eeae55bb5876eab1aa458d2d37356ab770f8bfc6a
+          kubectl.kubernetes.io/default-container: loki
+        labels:
+          app.kubernetes.io/component: single-binary
+          app.kubernetes.io/instance: loki
+          app.kubernetes.io/name: loki
+          app.kubernetes.io/part-of: memberlist
+      spec:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: single-binary
+                  app.kubernetes.io/instance: loki
+                  app.kubernetes.io/name: loki
+              topologyKey: kubernetes.io/hostname
+        automountServiceAccountToken: true
+        containers:
+        - args:
+          - -config.file=/etc/loki/config/config.yaml
+          - -target=all
+          image: docker.io/grafana/loki:3.6.11
+          imagePullPolicy: IfNotPresent
+          name: loki
+          ports:
+          - containerPort: 3100
+            name: http-metrics
+            protocol: TCP
+          - containerPort: 9095
+            name: grpc
+            protocol: TCP
+          - containerPort: 7946
+            name: http-memberlist
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /ready
+              port: http-metrics
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /etc/loki/config
+            name: config
+          - mountPath: /etc/loki/runtime-config
+            name: runtime-config
+          - mountPath: /rules
+            name: sc-rules-volume
+          - mountPath: /var/loki
+            name: loki-var
+        - env:
+          - name: METHOD
+            value: WATCH
+          - name: LABEL
+            value: loki_rule
+          - name: FOLDER
+            value: /rules
+          - name: RESOURCE
+            value: both
+          - name: WATCH_SERVER_TIMEOUT
+            value: "60"
+          - name: WATCH_CLIENT_TIMEOUT
+            value: "60"
+          - name: LOG_LEVEL
+            value: INFO
+          image: docker.io/kiwigrid/k8s-sidecar:2.5.0
+          imagePullPolicy: IfNotPresent
+          name: loki-sc-rules
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /rules
+            name: sc-rules-volume
+        dnsPolicy: ClusterFirst
+        enableServiceLinks: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 10001
+          fsGroupChangePolicy: OnRootMismatch
+          runAsGroup: 10001
+          runAsNonRoot: true
+          runAsUser: 10001
+        serviceAccount: loki
+        serviceAccountName: loki
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: tmp
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: config.yaml
+              path: config.yaml
+            name: loki
+          name: config
+        - configMap:
+            defaultMode: 420
+            name: loki-runtime
+          name: runtime-config
+        - emptyDir: {}
+          name: sc-rules-volume
+        - emptyDir:
+            sizeLimit: 500Mi
+          name: loki-var
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: loki-67c885dd44
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: loki-67c885dd44
+    updatedReplicas: 1
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    creationTimestamp: "2026-10-28T20:38:02Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+      batch.kubernetes.io/job-name: otel-trace-test
+      controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+      job-name: otel-trace-test
+    name: otel-trace-test
+    namespace: monitoring
+    resourceVersion: "747239"
+    uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+    suspend: false
+    template:
+      metadata:
+        labels:
+          batch.kubernetes.io/controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+          batch.kubernetes.io/job-name: otel-trace-test
+          controller-uid: 35f29bf3-3ab1-4393-ad4a-a6273e1ff2d7
+          job-name: otel-trace-test
+      spec:
+        containers:
+        - command:
+          - python
+          - -c
+          - |2
+
+            import json,time,urllib.request
+            now=time.time_ns()
+            p={"resourceSpans":[{"resource":{"attributes":[{"key":"service.name","value":{"stringValue":"robot-shop-trace-demo"}}]},"scopeSpans":[{"scope":{"name":"manual-otel-test"},"spans":[{"traceId":"0123456789abcdef0123456789abcdef","spanId":"0123456789abcdef","name":"robot-shop-demo-request","kind":1,"startTimeUnixNano":str(now-100000000),"endTimeUnixNano":str(now),"attributes":[{"key":"test.type","value":{"stringValue":"connectivity-verification"}}],"status":{"code":1}}]}]}]}
+            r=urllib.request.Request("http://jaeger.monitoring.svc.cluster.local:4318/v1/traces",data=json.dumps(p).encode(),headers={"Content-Type":"application/json"},method="POST")
+            with urllib.request.urlopen(r,timeout=10) as x: print("OTLP status:",x.status)
+            print("Trace ID: 0123456789abcdef0123456789abcdef")
+          image: python:3.12-alpine
+          imagePullPolicy: IfNotPresent
+          name: otel-trace-test
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    completionTime: "2026-10-28T20:38:06Z"
+    conditions:
+    - lastProbeTime: "2026-10-28T20:38:06Z"
+      lastTransitionTime: "2026-10-28T20:38:06Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: SuccessCriteriaMet
+    - lastProbeTime: "2026-10-28T20:38:06Z"
+      lastTransitionTime: "2026-10-28T20:38:06Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2026-10-28T20:38:02Z"
+    succeeded: 1
+    terminating: 0
+    uncountedTerminatedPods: {}
+kind: List
+metadata:
+  resourceVersion: ""

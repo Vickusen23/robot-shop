@@ -1,0 +1,4478 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: cart-67c7476467-
+    generation: 1
+    labels:
+      pod-template-hash: 67c7476467
+      service: cart
+    name: cart-67c7476467-zljj2
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: cart-67c7476467
+      uid: 5fdf4991-b153-4ff6-b1cb-869715ff3361
+    resourceVersion: "293166"
+    uid: dec68b80-102e-45fe-a4bf-73a37bbb031f
+  spec:
+    containers:
+    - env:
+      - name: INSTANA_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: robotshop/rs-cart:latest
+      imagePullPolicy: IfNotPresent
+      name: cart
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-trklx
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-trklx
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:45Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:45Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://376d1b0c309a1de5ea003e87364446d7e414e15eb1681f4ceda72b6bb478f24a
+      image: docker.io/robotshop/rs-cart:latest
+      imageID: docker.io/robotshop/rs-cart@sha256:388349d5cb3ccc14a192c345bfd42596920737db35d6a03a27457f6682710a37
+      lastState: {}
+      name: cart
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:45Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-trklx
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.92.68
+    podIPs:
+    - ip: 172.31.92.68
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: catalogue-7898454858-
+    generation: 1
+    labels:
+      pod-template-hash: "7898454858"
+      service: catalogue
+    name: catalogue-7898454858-h4d4m
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: catalogue-7898454858
+      uid: c258bba1-4143-4e88-b8c3-223a551ebf31
+    resourceVersion: "293257"
+    uid: 54e40473-25c0-453d-a909-ddeb4e63f04a
+  spec:
+    containers:
+    - env:
+      - name: INSTANA_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: robotshop/rs-catalogue:latest
+      imagePullPolicy: IfNotPresent
+      name: catalogue
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-4hpkg
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-4hpkg
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:18Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:32:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:32:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://edf47a766abf5da3b2b929b5e9ce3f6dc5cb39fc9b3e24194d9322983d686de3
+      image: docker.io/robotshop/rs-catalogue:latest
+      imageID: docker.io/robotshop/rs-catalogue@sha256:d545747c1b97cd2e0f41221291cd2f66781bceabaab2cfd42a7be4b8c2f3ba62
+      lastState: {}
+      name: catalogue
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:32:05Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-4hpkg
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.35.120
+    podIPs:
+    - ip: 172.31.35.120
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: dispatch-54f7f47d5d-
+    generation: 1
+    labels:
+      pod-template-hash: 54f7f47d5d
+      service: dispatch
+    name: dispatch-54f7f47d5d-qmmjx
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: dispatch-54f7f47d5d
+      uid: 3eeb59b6-95a5-4a7e-9ad3-9247113b7248
+    resourceVersion: "293200"
+    uid: 26ee6222-7e17-4284-bdc5-41b46605ce62
+  spec:
+    containers:
+    - env:
+      - name: INSTANA_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: robotshop/rs-dispatch:latest
+      imagePullPolicy: IfNotPresent
+      name: dispatch
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-cmwt5
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-cmwt5
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:53Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:53Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://82a7212c5cb8eb18fec3ccab53b96e71c795d2d5519f0344c38531a5a67e1f52
+      image: docker.io/robotshop/rs-dispatch:latest
+      imageID: docker.io/robotshop/rs-dispatch@sha256:de81f1d07b021f24c1cc66fef6aa27f9a5456f08b0c081dfb4cc71027ff67ead
+      lastState: {}
+      name: dispatch
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:52Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-cmwt5
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.33.166
+    podIPs:
+    - ip: 172.31.33.166
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T13:23:22Z"
+    generateName: load-gen-66fd6797f5-
+    generation: 1
+    labels:
+      pod-template-hash: 66fd6797f5
+      service: load-gen
+    name: load-gen-66fd6797f5-865c5
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: load-gen-66fd6797f5
+      uid: 334db78c-c19a-4f7b-8f6c-a4c926d4f70a
+    resourceVersion: "427086"
+    uid: 466ed3de-0124-4f72-8dbb-48d90c8f752c
+  spec:
+    containers:
+    - env:
+      - name: NUM_CLIENTS
+        value: "1"
+      - name: SILENT
+        value: "1"
+      image: robotshop/rs-load:latest
+      imagePullPolicy: Always
+      name: load-gen
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-mzskl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-9-38.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-mzskl
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T13:29:40Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T13:29:14Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T13:29:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T13:29:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T13:29:14Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://bc63b55a1be962b76c9f0033b22eabe1c7454ed959dcf4158fc31956bdaa31f4
+      image: docker.io/robotshop/rs-load:latest
+      imageID: docker.io/robotshop/rs-load@sha256:4041f38cb4d4c0263246dc4ceec493c5cd88e3be32b3292bd4960a1bceb8bd0e
+      lastState: {}
+      name: load-gen
+      ready: true
+      resources: {}
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T13:29:41Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-mzskl
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.9.38
+    hostIPs:
+    - ip: 172.31.9.38
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.11.8
+    podIPs:
+    - ip: 172.31.11.8
+    qosClass: BestEffort
+    startTime: "2026-10-27T13:29:14Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: mongodb-84bdfd8cd6-
+    generation: 1
+    labels:
+      pod-template-hash: 84bdfd8cd6
+      service: mongodb
+    name: mongodb-84bdfd8cd6-fzcfm
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: mongodb-84bdfd8cd6
+      uid: 08638d01-03bd-4b17-8bd1-5e5e4dada3fa
+    resourceVersion: "293144"
+    uid: 669a58f8-fbf6-46f0-8359-62c843c57d2c
+  spec:
+    containers:
+    - image: robotshop/rs-mongodb:latest
+      imagePullPolicy: IfNotPresent
+      name: mongodb
+      ports:
+      - containerPort: 27017
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8wt2z
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-8wt2z
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:41Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 100Mi
+      containerID: containerd://cc768b8baa38a8d04e2fa524bd33fe47ebca513774734e15ab3d9475c4e69c47
+      image: docker.io/robotshop/rs-mongodb:latest
+      imageID: docker.io/robotshop/rs-mongodb@sha256:119b545823cdce33a1d6cee87fdfed1cef82e680824ad0b49603be4aeb4e821e
+      lastState: {}
+      name: mongodb
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:40Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8wt2z
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.47.96
+    podIPs:
+    - ip: 172.31.47.96
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: mysql-74f87f9fc8-
+    generation: 1
+    labels:
+      pod-template-hash: 74f87f9fc8
+      service: mysql
+    name: mysql-74f87f9fc8-jzg4f
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: mysql-74f87f9fc8
+      uid: 966c22e7-e6c9-47f2-8312-c5242cec904b
+    resourceVersion: "293099"
+    uid: ec81649d-22c4-46d9-8c75-78dd7de8733a
+  spec:
+    containers:
+    - image: robotshop/rs-mysql-db:latest
+      imagePullPolicy: IfNotPresent
+      name: mysql
+      ports:
+      - containerPort: 3306
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 700Mi
+      securityContext:
+        capabilities:
+          add:
+          - NET_ADMIN
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-hq5g9
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-hq5g9
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:33Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:33Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 700Mi
+      containerID: containerd://4ea58dc0d66077c7642ee6247f7159f1faf6601cf03f99f0e8ecaefef0caa689
+      image: docker.io/robotshop/rs-mysql-db:latest
+      imageID: docker.io/robotshop/rs-mysql-db@sha256:2355f9700d771f4326169d7d370ad1824d2d410876036f77342d9663d80f893b
+      lastState: {}
+      name: mysql
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 700Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:32Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-hq5g9
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.39.117
+    podIPs:
+    - ip: 172.31.39.117
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: payment-5d8cd6f594-
+    generation: 1
+    labels:
+      pod-template-hash: 5d8cd6f594
+      service: payment
+      stage: prod
+    name: payment-5d8cd6f594-fbch7
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: payment-5d8cd6f594
+      uid: 40adc630-04cc-4359-ae68-df850623d711
+    resourceVersion: "293222"
+    uid: cacd2ca5-149d-414a-93bb-622bd8109180
+  spec:
+    containers:
+    - env:
+      - name: INSTANA_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: robotshop/rs-payment:latest
+      imagePullPolicy: IfNotPresent
+      name: payment
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-q6tpn
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-q6tpn
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:16Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:57Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:57Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://09f42f1a87e3e75154a6e1ae6849823dc6df643b1b4869d42a04af8c0fbb55af
+      image: docker.io/robotshop/rs-payment:latest
+      imageID: docker.io/robotshop/rs-payment@sha256:774b52c6180d8f3273f77230d70ace9c45e1f8909e21e10a19ed83b1cec53bb3
+      lastState: {}
+      name: payment
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:56Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-q6tpn
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.41.184
+    podIPs:
+    - ip: 172.31.41.184
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: rabbitmq-7f4fb78bb8-
+    generation: 1
+    labels:
+      pod-template-hash: 7f4fb78bb8
+      service: rabbitmq
+    name: rabbitmq-7f4fb78bb8-kp4v4
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: rabbitmq-7f4fb78bb8
+      uid: aa2024b4-7040-465c-842f-10038e8f7df7
+    resourceVersion: "293062"
+    uid: b0006be1-60e5-4d17-a127-742049793e62
+  spec:
+    containers:
+    - image: rabbitmq:3.7-management-alpine
+      imagePullPolicy: IfNotPresent
+      name: rabbitmq
+      ports:
+      - containerPort: 5672
+        protocol: TCP
+      - containerPort: 15672
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-vf4lf
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-vf4lf
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:24Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:24Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 256Mi
+      containerID: containerd://5ac2af248883ab9c4acfab95f1d656340fcbaa9dbad9fed9ab61af24ce3da185
+      image: docker.io/library/rabbitmq:3.7-management-alpine
+      imageID: docker.io/library/rabbitmq@sha256:e97f6bb68aab3f747f8a6f4dc52ed57401de91ca480a0be3a36e7476ac273169
+      lastState: {}
+      name: rabbitmq
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:23Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 6
+          - 10
+          - 11
+          - 20
+          - 26
+          - 27
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-vf4lf
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.93.231
+    podIPs:
+    - ip: 172.31.93.231
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: ratings-d5b7d45c-
+    generation: 1
+    labels:
+      pod-template-hash: d5b7d45c
+      service: ratings
+    name: ratings-d5b7d45c-t62bv
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: ratings-d5b7d45c
+      uid: bc852cda-5449-451f-b544-489944a4a5d2
+    resourceVersion: "293744"
+    uid: 52a63579-c2bc-4565-a1d5-df815d566c28
+  spec:
+    containers:
+    - image: robotshop/rs-ratings:latest
+      imagePullPolicy: IfNotPresent
+      name: ratings
+      ports:
+      - containerPort: 80
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 30
+        httpGet:
+          path: /_health
+          port: 80
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-zmpbm
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-zmpbm
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:34:40Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:34:40Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://aa54b743d41bc48be8afe8344eba0f36628b8de63dd64a78afe9463f9a3126a1
+      image: docker.io/robotshop/rs-ratings:latest
+      imageID: docker.io/robotshop/rs-ratings@sha256:4899c686c249464783663342620425dc8c75a5d59ca55c247cf6aec62a5fff1a
+      lastState: {}
+      name: ratings
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:35Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-zmpbm
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.88.155
+    podIPs:
+    - ip: 172.31.88.155
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:57:21Z"
+    generateName: redis-fcb65b8bc-
+    generation: 1
+    labels:
+      pod-template-hash: fcb65b8bc
+      service: redis
+    name: redis-fcb65b8bc-q2mp6
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: redis-fcb65b8bc
+      uid: ffab21ff-3e4d-497d-8d65-63434d563b5a
+    resourceVersion: "300953"
+    uid: 44c81147-d2e6-4b08-8b39-81d4d4f415cf
+  spec:
+    containers:
+    - image: redis:4.0.6
+      imagePullPolicy: IfNotPresent
+      name: redis
+      ports:
+      - containerPort: 6379
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /mnt/redis
+        name: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-9ljn5
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - emptyDir: {}
+      name: data
+    - name: kube-api-access-9ljn5
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T01:17:35Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T01:16:58Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T01:17:38Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T01:17:38Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T01:16:58Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://3923644e8b6a1f564f3cb0e737510786b4637e40a136b2422106ea2466647804
+      image: docker.io/library/redis:4.0.6
+      imageID: docker.io/library/redis@sha256:0e773022cd6572a5153e5013afced0f7191652d3cdf9b1c6785eb13f6b2974b1
+      lastState: {}
+      name: redis
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T01:17:37Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /mnt/redis
+        name: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-9ljn5
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.41.252
+    podIPs:
+    - ip: 172.31.41.252
+    qosClass: Burstable
+    startTime: "2026-10-27T01:16:58Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: shipping-f4d9b999-
+    generation: 1
+    labels:
+      pod-template-hash: f4d9b999
+      service: shipping
+    name: shipping-f4d9b999-lklxl
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: shipping-f4d9b999
+      uid: adccedf5-c5e8-4700-9720-485c02213adb
+    resourceVersion: "293976"
+    uid: b2d91c4b-8b7b-48a9-b57c-17c706cdcf3e
+  spec:
+    containers:
+    - image: robotshop/rs-shipping:latest
+      imagePullPolicy: IfNotPresent
+      name: shipping
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 30
+        httpGet:
+          path: /health
+          port: 8080
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 200m
+          memory: 1000Mi
+        requests:
+          cpu: 100m
+          memory: 500Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-dj8qq
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-dj8qq
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:04Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:36:00Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:36:00Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 500Mi
+      containerID: containerd://5f2968d09da6a9d289a9df015fea0730ad79367e714dc9204808ce43be7c74c4
+      image: docker.io/robotshop/rs-shipping:latest
+      imageID: docker.io/robotshop/rs-shipping@sha256:89753ab489193286402c9486379da63c18a21d697b4fbd41246b68aacabfc6d3
+      lastState: {}
+      name: shipping
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 1000Mi
+        requests:
+          cpu: 100m
+          memory: 500Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:31:36Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-dj8qq
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.92.149
+    podIPs:
+    - ip: 172.31.92.149
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generateName: user-8449b7664b-
+    generation: 1
+    labels:
+      pod-template-hash: 8449b7664b
+      service: user
+    name: user-8449b7664b-bk7nx
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: user-8449b7664b
+      uid: d90530b8-1446-4a7e-af44-80c40854b664
+    resourceVersion: "293262"
+    uid: 0dcd5973-22e6-4875-9ec4-a9cd8e4005b9
+  spec:
+    containers:
+    - env:
+      - name: INSTANA_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: robotshop/rs-user:latest
+      imagePullPolicy: IfNotPresent
+      name: user
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-q9w9f
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-40-182.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-q9w9f
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:16Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:32:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:32:05Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-27T00:31:03Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://a697e773ba1bedf79b74bd81d11705014a7fa913d690160a5b099ae6e002dec9
+      image: docker.io/robotshop/rs-user:latest
+      imageID: docker.io/robotshop/rs-user@sha256:ea509182c180d20340a9427d8320f35085effdb4ed77b15275022d17bdd1fcf7
+      lastState: {}
+      name: user
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-27T00:32:04Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-q9w9f
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.40.182
+    hostIPs:
+    - ip: 172.31.40.182
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.43.106
+    podIPs:
+    - ip: 172.31.43.106
+    qosClass: Burstable
+    startTime: "2026-10-27T00:31:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-10-29T21:18:11Z"
+    generateName: web-c4f7b4487-
+    generation: 1
+    labels:
+      pod-template-hash: c4f7b4487
+      service: web
+    name: web-c4f7b4487-t6nx8
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: web-c4f7b4487
+      uid: 1d61e0a1-f24f-4872-8ae2-22a0b59d94b3
+    resourceVersion: "999939"
+    uid: 5c935805-6c6c-402b-9139-495c1b6b59df
+  spec:
+    containers:
+    - image: robotshop/rs-web:latest
+      imagePullPolicy: IfNotPresent
+      name: web
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-6vr89
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-80-49.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-6vr89
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-29T21:18:12Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-29T21:18:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-29T21:18:12Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-29T21:18:12Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-10-29T21:18:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 100m
+        memory: 50Mi
+      containerID: containerd://a80a8c6f66cbcbfa186a5af641064826baa55dbe5d2ae6aa541634468f378a74
+      image: docker.io/robotshop/rs-web:latest
+      imageID: docker.io/robotshop/rs-web@sha256:b3c20d4a22f2875397726d2184062360bb2ab9c8776beffca7c2e7b3652893bc
+      lastState: {}
+      name: web
+      ready: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 50Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-10-29T21:18:12Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-6vr89
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.80.49
+    hostIPs:
+    - ip: 172.31.80.49
+    observedGeneration: 1
+    phase: Running
+    podIP: 172.31.83.138
+    podIPs:
+    - ip: 172.31.83.138
+    qosClass: Burstable
+    startTime: "2026-10-29T21:18:11Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+    name: cart
+    namespace: robot-shop
+    resourceVersion: "292773"
+    uid: 1ef4f567-02e9-48fe-8baf-a26008942ac1
+  spec:
+    clusterIP: 10.100.215.139
+    clusterIPs:
+    - 10.100.215.139
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: cart
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: catalogue
+    name: catalogue
+    namespace: robot-shop
+    resourceVersion: "292807"
+    uid: 16c4d649-7566-44db-b0b1-839131992b9b
+  spec:
+    clusterIP: 10.100.14.240
+    clusterIPs:
+    - 10.100.14.240
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: catalogue
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: dispatch
+    name: dispatch
+    namespace: robot-shop
+    resourceVersion: "292766"
+    uid: c6d05c28-451f-4286-98e4-f4dd7d51f530
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: headless
+      port: 55555
+      protocol: TCP
+      targetPort: 55555
+    selector:
+      service: dispatch
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: mongodb
+    name: mongodb
+    namespace: robot-shop
+    resourceVersion: "292781"
+    uid: 1ef33769-2aeb-460a-9cc4-617b467a05cc
+  spec:
+    clusterIP: 10.100.147.68
+    clusterIPs:
+    - 10.100.147.68
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: mongo
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+    selector:
+      service: mongodb
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: mysql
+    name: mysql
+    namespace: robot-shop
+    resourceVersion: "292811"
+    uid: 13f42070-b1a2-45ba-a53a-e32482f81fe3
+  spec:
+    clusterIP: 10.100.56.82
+    clusterIPs:
+    - 10.100.56.82
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: mysql
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      service: mysql
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: payment
+    name: payment
+    namespace: robot-shop
+    resourceVersion: "292787"
+    uid: 1b74f644-60fd-475c-9c1a-421801174a59
+  spec:
+    clusterIP: 10.100.163.104
+    clusterIPs:
+    - 10.100.163.104
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: payment
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: rabbitmq
+    name: rabbitmq
+    namespace: robot-shop
+    resourceVersion: "292798"
+    uid: 4efb7643-efe6-4e91-abe2-5247a5760f30
+  spec:
+    clusterIP: 10.100.225.126
+    clusterIPs:
+    - 10.100.225.126
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-amqp
+      port: 5672
+      protocol: TCP
+      targetPort: 5672
+    - name: http-management
+      port: 15672
+      protocol: TCP
+      targetPort: 15672
+    - name: tcp-epmd
+      port: 4369
+      protocol: TCP
+      targetPort: 4369
+    selector:
+      service: rabbitmq
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: ratings
+    name: ratings
+    namespace: robot-shop
+    resourceVersion: "292803"
+    uid: c5114e4f-18a1-4c85-881c-67dc8d2eede6
+  spec:
+    clusterIP: 10.100.228.8
+    clusterIPs:
+    - 10.100.228.8
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      service: ratings
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: redis
+    name: redis
+    namespace: robot-shop
+    resourceVersion: "292794"
+    uid: 32b225e3-7aba-4367-a1f8-f78e6d2d0b58
+  spec:
+    clusterIP: 10.100.83.41
+    clusterIPs:
+    - 10.100.83.41
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: redis
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      service: redis
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: shipping
+    name: shipping
+    namespace: robot-shop
+    resourceVersion: "292782"
+    uid: f80e92ef-e45e-4077-a09e-4b6963f80a72
+  spec:
+    clusterIP: 10.100.110.66
+    clusterIPs:
+    - 10.100.110.66
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: shipping
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: user
+    name: user
+    namespace: robot-shop
+    resourceVersion: "292814"
+    uid: 5376a2c3-c364-48b5-9ef4-68de8ae31073
+  spec:
+    clusterIP: 10.100.91.174
+    clusterIPs:
+    - 10.100.91.174
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: user
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: web
+    name: web
+    namespace: robot-shop
+    resourceVersion: "292999"
+    uid: 8f3d3a72-1664-4c36-956e-0c940130bdcb
+  spec:
+    allocateLoadBalancerNodePorts: true
+    clusterIP: 10.100.53.92
+    clusterIPs:
+    - 10.100.53.92
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      nodePort: 31777
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      service: web
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - hostname: a8f3d3a7216644c36956e0c940130bdc-1654323098.us-east-1.elb.amazonaws.com
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: cart
+    name: cart
+    namespace: robot-shop
+    resourceVersion: "293169"
+    uid: 0c469cb2-7382-4892-985e-4738a79501eb
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: cart
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: cart
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-cart:latest
+          imagePullPolicy: IfNotPresent
+          name: cart
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:45Z"
+      lastUpdateTime: "2026-10-27T00:31:45Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:02Z"
+      lastUpdateTime: "2026-10-27T00:31:45Z"
+      message: ReplicaSet "cart-67c7476467" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: catalogue
+    name: catalogue
+    namespace: robot-shop
+    resourceVersion: "293261"
+    uid: 17438ac9-fc34-47d0-87f0-dbd7c44a8601
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: catalogue
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: catalogue
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-catalogue:latest
+          imagePullPolicy: IfNotPresent
+          name: catalogue
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:32:05Z"
+      lastUpdateTime: "2026-10-27T00:32:05Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:32:05Z"
+      message: ReplicaSet "catalogue-7898454858" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: dispatch
+    name: dispatch
+    namespace: robot-shop
+    resourceVersion: "293204"
+    uid: 7eb2b24b-6470-4132-b8d9-b39707ff80cc
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: dispatch
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: dispatch
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-dispatch:latest
+          imagePullPolicy: IfNotPresent
+          name: dispatch
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:53Z"
+      lastUpdateTime: "2026-10-27T00:31:53Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:02Z"
+      lastUpdateTime: "2026-10-27T00:31:53Z"
+      message: ReplicaSet "dispatch-54f7f47d5d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "4"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"service":"load-gen"},"name":"load-gen","namespace":"robot-shop"},"spec":{"replicas":1,"selector":{"matchLabels":{"service":"load-gen"}},"template":{"metadata":{"labels":{"service":"load-gen"}},"spec":{"containers":[{"env":[{"name":"NUM_CLIENTS","value":"1"},{"name":"SILENT","value":"1"}],"image":"robotshop/rs-load-gen:latest","name":"load-gen"}]}}}}
+    creationTimestamp: "2026-10-27T01:34:51Z"
+    generation: 4
+    labels:
+      service: load-gen
+    name: load-gen
+    namespace: robot-shop
+    resourceVersion: "427088"
+    uid: 69ab5a31-a734-4ada-8acd-aba899d39b72
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: load-gen
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: load-gen
+      spec:
+        containers:
+        - env:
+          - name: NUM_CLIENTS
+            value: "1"
+          - name: SILENT
+            value: "1"
+          image: robotshop/rs-load:latest
+          imagePullPolicy: Always
+          name: load-gen
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T01:34:51Z"
+      lastUpdateTime: "2026-10-27T01:48:40Z"
+      message: ReplicaSet "load-gen-66fd6797f5" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-10-27T13:29:41Z"
+      lastUpdateTime: "2026-10-27T13:29:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 4
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: mongodb
+    name: mongodb
+    namespace: robot-shop
+    resourceVersion: "293148"
+    uid: 2bdbf943-421e-4d97-a2e3-5a72c213c120
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: mongodb
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: mongodb
+      spec:
+        containers:
+        - image: robotshop/rs-mongodb:latest
+          imagePullPolicy: IfNotPresent
+          name: mongodb
+          ports:
+          - containerPort: 27017
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:41Z"
+      lastUpdateTime: "2026-10-27T00:31:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:31:41Z"
+      message: ReplicaSet "mongodb-84bdfd8cd6" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: mysql
+    name: mysql
+    namespace: robot-shop
+    resourceVersion: "293103"
+    uid: 3d73bc6f-8170-45cb-a321-491f54514285
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: mysql
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: mysql
+      spec:
+        containers:
+        - image: robotshop/rs-mysql-db:latest
+          imagePullPolicy: IfNotPresent
+          name: mysql
+          ports:
+          - containerPort: 3306
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 700Mi
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:33Z"
+      lastUpdateTime: "2026-10-27T00:31:33Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:02Z"
+      lastUpdateTime: "2026-10-27T00:31:33Z"
+      message: ReplicaSet "mysql-74f87f9fc8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: payment
+      stage: prod
+    name: payment
+    namespace: robot-shop
+    resourceVersion: "293226"
+    uid: f2fcd334-44ea-4879-aa92-a313629bf9b2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: payment
+        stage: prod
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: payment
+          stage: prod
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-payment:latest
+          imagePullPolicy: IfNotPresent
+          name: payment
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:57Z"
+      lastUpdateTime: "2026-10-27T00:31:57Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:31:57Z"
+      message: ReplicaSet "payment-5d8cd6f594" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: rabbitmq
+    name: rabbitmq
+    namespace: robot-shop
+    resourceVersion: "293070"
+    uid: e4bec449-1aa3-44a2-99b6-052c4bc30206
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: rabbitmq
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: rabbitmq
+      spec:
+        containers:
+        - image: rabbitmq:3.7-management-alpine
+          imagePullPolicy: IfNotPresent
+          name: rabbitmq
+          ports:
+          - containerPort: 5672
+            protocol: TCP
+          - containerPort: 15672
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:24Z"
+      lastUpdateTime: "2026-10-27T00:31:24Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:02Z"
+      lastUpdateTime: "2026-10-27T00:31:24Z"
+      message: ReplicaSet "rabbitmq-7f4fb78bb8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: ratings
+    name: ratings
+    namespace: robot-shop
+    resourceVersion: "293748"
+    uid: 8695b7e4-213b-4b40-931f-68e848336ef7
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: ratings
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: ratings
+      spec:
+        containers:
+        - image: robotshop/rs-ratings:latest
+          imagePullPolicy: IfNotPresent
+          name: ratings
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /_health
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:34:40Z"
+      lastUpdateTime: "2026-10-27T00:34:40Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:34:40Z"
+      message: ReplicaSet "ratings-d5b7d45c" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"service":"redis"},"name":"redis","namespace":"robot-shop"},"spec":{"replicas":1,"selector":{"matchLabels":{"service":"redis"}},"template":{"metadata":{"labels":{"service":"redis"}},"spec":{"containers":[{"image":"redis:4.0.6","name":"redis","ports":[{"containerPort":6379}],"resources":{"limits":{"cpu":"200m","memory":"100Mi"},"requests":{"cpu":"100m","memory":"50Mi"}},"volumeMounts":[{"mountPath":"/mnt/redis","name":"data"}]}],"volumes":[{"emptyDir":{},"name":"data"}]}}}}
+    creationTimestamp: "2026-10-27T00:57:21Z"
+    generation: 1
+    labels:
+      service: redis
+    name: redis
+    namespace: robot-shop
+    resourceVersion: "300956"
+    uid: 3abcf99a-427b-450d-a1a3-94383fdd0409
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: redis
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: redis
+      spec:
+        containers:
+        - image: redis:4.0.6
+          imagePullPolicy: IfNotPresent
+          name: redis
+          ports:
+          - containerPort: 6379
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /mnt/redis
+            name: data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: data
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T01:17:38Z"
+      lastUpdateTime: "2026-10-27T01:17:38Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T01:17:38Z"
+      lastUpdateTime: "2026-10-27T01:17:38Z"
+      message: ReplicaSet "redis-fcb65b8bc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: shipping
+    name: shipping
+    namespace: robot-shop
+    resourceVersion: "293979"
+    uid: e73a77a0-18da-4dfd-9561-2134b1a05bff
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: shipping
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: shipping
+      spec:
+        containers:
+        - image: robotshop/rs-shipping:latest
+          imagePullPolicy: IfNotPresent
+          name: shipping
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:36:00Z"
+      lastUpdateTime: "2026-10-27T00:36:00Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:36:00Z"
+      message: ReplicaSet "shipping-f4d9b999" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: user
+    name: user
+    namespace: robot-shop
+    resourceVersion: "293266"
+    uid: a47c9ec2-9a5e-48d7-a95a-69f0d0ab6ca8
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: user
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: user
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-user:latest
+          imagePullPolicy: IfNotPresent
+          name: user
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:32:05Z"
+      lastUpdateTime: "2026-10-27T00:32:05Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-10-27T00:31:03Z"
+      lastUpdateTime: "2026-10-27T00:32:05Z"
+      message: ReplicaSet "user-8449b7664b" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      service: web
+    name: web
+    namespace: robot-shop
+    resourceVersion: "999943"
+    uid: 1a2073c1-2037-4487-8a9a-9906abf93ab2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        service: web
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          service: web
+      spec:
+        containers:
+        - image: robotshop/rs-web:latest
+          imagePullPolicy: IfNotPresent
+          name: web
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-10-27T00:31:02Z"
+      lastUpdateTime: "2026-10-27T00:31:24Z"
+      message: ReplicaSet "web-c4f7b4487" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-10-29T21:18:12Z"
+      lastUpdateTime: "2026-10-29T21:18:12Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      pod-template-hash: 67c7476467
+      service: cart
+    name: cart-67c7476467
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: cart
+      uid: 0c469cb2-7382-4892-985e-4738a79501eb
+    resourceVersion: "293167"
+    uid: 5fdf4991-b153-4ff6-b1cb-869715ff3361
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 67c7476467
+        service: cart
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 67c7476467
+          service: cart
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-cart:latest
+          imagePullPolicy: IfNotPresent
+          name: cart
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: "7898454858"
+      service: catalogue
+    name: catalogue-7898454858
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: catalogue
+      uid: 17438ac9-fc34-47d0-87f0-dbd7c44a8601
+    resourceVersion: "293260"
+    uid: c258bba1-4143-4e88-b8c3-223a551ebf31
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: "7898454858"
+        service: catalogue
+    template:
+      metadata:
+        labels:
+          pod-template-hash: "7898454858"
+          service: catalogue
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-catalogue:latest
+          imagePullPolicy: IfNotPresent
+          name: catalogue
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      pod-template-hash: 54f7f47d5d
+      service: dispatch
+    name: dispatch-54f7f47d5d
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: dispatch
+      uid: 7eb2b24b-6470-4132-b8d9-b39707ff80cc
+    resourceVersion: "293201"
+    uid: 3eeb59b6-95a5-4a7e-9ad3-9247113b7248
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 54f7f47d5d
+        service: dispatch
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 54f7f47d5d
+          service: dispatch
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-dispatch:latest
+          imagePullPolicy: IfNotPresent
+          name: dispatch
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "3"
+    creationTimestamp: "2026-10-27T01:44:32Z"
+    generation: 3
+    labels:
+      pod-template-hash: 578686cf78
+      service: load-gen
+    name: load-gen-578686cf78
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: load-gen
+      uid: 69ab5a31-a734-4ada-8acd-aba899d39b72
+    resourceVersion: "306639"
+    uid: fc94384e-d09f-4a8e-a23a-89a87d14ecef
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        pod-template-hash: 578686cf78
+        service: load-gen
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 578686cf78
+          service: load-gen
+      spec:
+        containers:
+        - env:
+          - name: NUM_CLIENTS
+            value: "1"
+          - name: SILENT
+            value: "1"
+          image: robotshop/rs-loadgenerator:latest
+          imagePullPolicy: Always
+          name: load-gen
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "4"
+    creationTimestamp: "2026-10-27T01:48:26Z"
+    generation: 2
+    labels:
+      pod-template-hash: 66fd6797f5
+      service: load-gen
+    name: load-gen-66fd6797f5
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: load-gen
+      uid: 69ab5a31-a734-4ada-8acd-aba899d39b72
+    resourceVersion: "427087"
+    uid: 334db78c-c19a-4f7b-8f6c-a4c926d4f70a
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 66fd6797f5
+        service: load-gen
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 66fd6797f5
+          service: load-gen
+      spec:
+        containers:
+        - env:
+          - name: NUM_CLIENTS
+            value: "1"
+          - name: SILENT
+            value: "1"
+          image: robotshop/rs-load:latest
+          imagePullPolicy: Always
+          name: load-gen
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-10-27T01:34:51Z"
+    generation: 2
+    labels:
+      pod-template-hash: 7d89655474
+      service: load-gen
+    name: load-gen-7d89655474
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: load-gen
+      uid: 69ab5a31-a734-4ada-8acd-aba899d39b72
+    resourceVersion: "305723"
+    uid: 73f50ddf-721f-4e77-bf2e-42dbf033b3ce
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        pod-template-hash: 7d89655474
+        service: load-gen
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 7d89655474
+          service: load-gen
+      spec:
+        containers:
+        - env:
+          - name: NUM_CLIENTS
+            value: "1"
+          - name: SILENT
+            value: "1"
+          image: robotshop/rs-load-gen:latest
+          imagePullPolicy: Always
+          name: load-gen
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "2"
+    creationTimestamp: "2026-10-27T01:41:12Z"
+    generation: 2
+    labels:
+      pod-template-hash: 854658cbd7
+      service: load-gen
+    name: load-gen-854658cbd7
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: load-gen
+      uid: 69ab5a31-a734-4ada-8acd-aba899d39b72
+    resourceVersion: "306569"
+    uid: f600d01b-16b7-40f9-af6c-9a7ac0b2240a
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        pod-template-hash: 854658cbd7
+        service: load-gen
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 854658cbd7
+          service: load-gen
+      spec:
+        containers:
+        - env:
+          - name: NUM_CLIENTS
+            value: "1"
+          - name: SILENT
+            value: "1"
+          image: robotshop/rs-load-gen:0.4.2
+          imagePullPolicy: Always
+          name: load-gen
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: 84bdfd8cd6
+      service: mongodb
+    name: mongodb-84bdfd8cd6
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: mongodb
+      uid: 2bdbf943-421e-4d97-a2e3-5a72c213c120
+    resourceVersion: "293147"
+    uid: 08638d01-03bd-4b17-8bd1-5e5e4dada3fa
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 84bdfd8cd6
+        service: mongodb
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 84bdfd8cd6
+          service: mongodb
+      spec:
+        containers:
+        - image: robotshop/rs-mongodb:latest
+          imagePullPolicy: IfNotPresent
+          name: mongodb
+          ports:
+          - containerPort: 27017
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      pod-template-hash: 74f87f9fc8
+      service: mysql
+    name: mysql-74f87f9fc8
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: mysql
+      uid: 3d73bc6f-8170-45cb-a321-491f54514285
+    resourceVersion: "293100"
+    uid: 966c22e7-e6c9-47f2-8312-c5242cec904b
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 74f87f9fc8
+        service: mysql
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 74f87f9fc8
+          service: mysql
+      spec:
+        containers:
+        - image: robotshop/rs-mysql-db:latest
+          imagePullPolicy: IfNotPresent
+          name: mysql
+          ports:
+          - containerPort: 3306
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 700Mi
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: 5d8cd6f594
+      service: payment
+      stage: prod
+    name: payment-5d8cd6f594
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: payment
+      uid: f2fcd334-44ea-4879-aa92-a313629bf9b2
+    resourceVersion: "293225"
+    uid: 40adc630-04cc-4359-ae68-df850623d711
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 5d8cd6f594
+        service: payment
+        stage: prod
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 5d8cd6f594
+          service: payment
+          stage: prod
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-payment:latest
+          imagePullPolicy: IfNotPresent
+          name: payment
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 1
+    labels:
+      pod-template-hash: 7f4fb78bb8
+      service: rabbitmq
+    name: rabbitmq-7f4fb78bb8
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: rabbitmq
+      uid: e4bec449-1aa3-44a2-99b6-052c4bc30206
+    resourceVersion: "293067"
+    uid: aa2024b4-7040-465c-842f-10038e8f7df7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 7f4fb78bb8
+        service: rabbitmq
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 7f4fb78bb8
+          service: rabbitmq
+      spec:
+        containers:
+        - image: rabbitmq:3.7-management-alpine
+          imagePullPolicy: IfNotPresent
+          name: rabbitmq
+          ports:
+          - containerPort: 5672
+            protocol: TCP
+          - containerPort: 15672
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: d5b7d45c
+      service: ratings
+    name: ratings-d5b7d45c
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: ratings
+      uid: 8695b7e4-213b-4b40-931f-68e848336ef7
+    resourceVersion: "293745"
+    uid: bc852cda-5449-451f-b544-489944a4a5d2
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: d5b7d45c
+        service: ratings
+    template:
+      metadata:
+        labels:
+          pod-template-hash: d5b7d45c
+          service: ratings
+      spec:
+        containers:
+        - image: robotshop/rs-ratings:latest
+          imagePullPolicy: IfNotPresent
+          name: ratings
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /_health
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-10-27T00:57:21Z"
+    generation: 1
+    labels:
+      pod-template-hash: fcb65b8bc
+      service: redis
+    name: redis-fcb65b8bc
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: redis
+      uid: 3abcf99a-427b-450d-a1a3-94383fdd0409
+    resourceVersion: "300954"
+    uid: ffab21ff-3e4d-497d-8d65-63434d563b5a
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: fcb65b8bc
+        service: redis
+    template:
+      metadata:
+        labels:
+          pod-template-hash: fcb65b8bc
+          service: redis
+      spec:
+        containers:
+        - image: redis:4.0.6
+          imagePullPolicy: IfNotPresent
+          name: redis
+          ports:
+          - containerPort: 6379
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /mnt/redis
+            name: data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: data
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: f4d9b999
+      service: shipping
+    name: shipping-f4d9b999
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: shipping
+      uid: e73a77a0-18da-4dfd-9561-2134b1a05bff
+    resourceVersion: "293977"
+    uid: adccedf5-c5e8-4700-9720-485c02213adb
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: f4d9b999
+        service: shipping
+    template:
+      metadata:
+        labels:
+          pod-template-hash: f4d9b999
+          service: shipping
+      spec:
+        containers:
+        - image: robotshop/rs-shipping:latest
+          imagePullPolicy: IfNotPresent
+          name: shipping
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:03Z"
+    generation: 1
+    labels:
+      pod-template-hash: 8449b7664b
+      service: user
+    name: user-8449b7664b
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: user
+      uid: a47c9ec2-9a5e-48d7-a95a-69f0d0ab6ca8
+    resourceVersion: "293265"
+    uid: d90530b8-1446-4a7e-af44-80c40854b664
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: 8449b7664b
+        service: user
+    template:
+      metadata:
+        labels:
+          pod-template-hash: 8449b7664b
+          service: user
+      spec:
+        containers:
+        - env:
+          - name: INSTANA_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          image: robotshop/rs-user:latest
+          imagePullPolicy: IfNotPresent
+          name: user
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: robot-shop
+      meta.helm.sh/release-namespace: robot-shop
+    creationTimestamp: "2026-10-27T00:31:02Z"
+    generation: 3
+    labels:
+      pod-template-hash: c4f7b4487
+      service: web
+    name: web-c4f7b4487
+    namespace: robot-shop
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: web
+      uid: 1a2073c1-2037-4487-8a9a-9906abf93ab2
+    resourceVersion: "999942"
+    uid: 1d61e0a1-f24f-4872-8ae2-22a0b59d94b3
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        pod-template-hash: c4f7b4487
+        service: web
+    template:
+      metadata:
+        labels:
+          pod-template-hash: c4f7b4487
+          service: web
+      spec:
+        containers:
+        - image: robotshop/rs-web:latest
+          imagePullPolicy: IfNotPresent
+          name: web
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
